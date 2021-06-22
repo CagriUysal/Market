@@ -8,4 +8,5 @@ export default Basket;
 
 const BasketContainer = styled.div`
   flex-grow: 1;
+  text-align: center;
 `;

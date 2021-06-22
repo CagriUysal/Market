@@ -8,4 +8,5 @@ export default DisplayOptions;
 
 const DisplayOptionsContainer = styled.div`
   flex-grow: 1;
+  text-align: center;
 `;
