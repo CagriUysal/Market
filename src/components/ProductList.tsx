@@ -13,7 +13,7 @@ function ProductList() {
   return (
     <Container>
       {products?.map((product) => (
-        <ProductItem product={product} />
+        <ProductItem product={product} key={product.slug} />
       ))}
     </Container>
   );

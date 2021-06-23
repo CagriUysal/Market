@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import ItemTypes from "./ItemTypes";
 import ProductList from "./ProductList";
+import Pagination from "./Pagination";
 
 function Products() {
   return (
@@ -9,6 +10,7 @@ function Products() {
       <ProductTitle>Products</ProductTitle>
       <ItemTypes />
       <ProductList />
+      <Pagination />
     </ProductsContainer>
   );
 }

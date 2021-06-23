@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import itemType from "./reducers/itemType";
+import basket from "./reducers/basket";
 
 const store = configureStore({
   reducer: {
     itemType,
+    basket,
   },
 });
 

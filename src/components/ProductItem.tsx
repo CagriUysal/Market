@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 import { Product } from "../api";
+import { useAppDispatch } from "../app/hooks";
+import { addItem } from "../app/reducers/basket";
 
 interface Props {
   product: Product;
@@ -9,6 +11,12 @@ interface Props {
 function ProductItem({ product }: Props) {
   const { price, name } = product;
 
+  const dispatch = useAppDispatch();
+
+  const handleAddClick = () => {
+    dispatch(addItem(product));
+  };
+
   return (
     <Container>
       <ProductBG>
@@ -16,7 +24,7 @@ function ProductItem({ product }: Props) {
       </ProductBG>
       <Price>{`₺ ${price}`}</Price>
       <Name>{name}</Name>
-      <AddButton>Add</AddButton>
+      <AddButton onClick={handleAddClick}>Add</AddButton>
     </Container>
   );
 }
