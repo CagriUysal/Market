@@ -7,6 +7,6 @@ function DisplayOptions() {
 export default DisplayOptions;
 
 const DisplayOptionsContainer = styled.div`
-  flex-grow: 1;
+  flex: 1 0 25%;
   text-align: center;
 `;

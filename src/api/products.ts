@@ -5,7 +5,7 @@ import fetcher from "./fetcher";
 
 export type ItemType = "mug" | "shirt";
 
-interface Product {
+export interface Product {
   tags: string[];
   price: number;
   name: string;
@@ -29,10 +29,8 @@ export function useProducts(fetchOptions: FetchOptions = {}) {
     itemType = "mug",
   } = fetchOptions;
 
-  const { data, error } = useSWR(
-    `/items?_page=${page}&_limit=${itemsPerPage}&itemType=${itemType}`,
-    (url) => fetcher<Product[]>(url)
-  );
+  const key = `/items?_page=${page}&_limit=${itemsPerPage}&itemType=${itemType}`;
+  const { data, error } = useSWR(key, (url) => fetcher<Product[]>(url));
 
   return { products: data, error, loading: !data && !error };
 }

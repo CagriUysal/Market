@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
 	body {
 		margin: 0;
 		font-family: ${primaryFont};
-		background-color: ${backgroundColor}
+		background-color: ${backgroundColor};
 	}
 
 	main {

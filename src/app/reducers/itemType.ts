@@ -8,8 +8,7 @@ export const itemTypeSlice = createSlice({
   name: "itemType",
   initialState,
   reducers: {
-    changeType: (state, action: PayloadAction<ItemType>) =>
-      (state = action.payload),
+    changeType: (state, action: PayloadAction<ItemType>) => action.payload,
   },
 });
 

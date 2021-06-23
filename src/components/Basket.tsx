@@ -7,6 +7,6 @@ function Basket() {
 export default Basket;
 
 const BasketContainer = styled.div`
-  flex-grow: 1;
+  flex: 1 0 25%;
   text-align: center;
 `;
