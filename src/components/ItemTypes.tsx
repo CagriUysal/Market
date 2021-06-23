@@ -1,23 +1,24 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-import { ItemType } from "../api";
+import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { changeType } from "../app/reducers/itemType";
 
 function ProductTypeSelection() {
-  const [activeChip, setActiveChip] = useState<ItemType>("mug");
+  const itemType = useAppSelector((state) => state.itemType);
+  const dispatch = useAppDispatch();
 
   return (
     <>
       <Chip
         style={{ marginRight: "1rem" }}
-        active={activeChip === "mug"}
-        onClick={() => setActiveChip("mug")}
+        active={itemType === "mug"}
+        onClick={() => dispatch(changeType("mug"))}
       >
         mug
       </Chip>
       <Chip
-        active={activeChip === "shirt"}
-        onClick={() => setActiveChip("shirt")}
+        active={itemType === "shirt"}
+        onClick={() => dispatch(changeType("shirt"))}
       >
         shirt
       </Chip>

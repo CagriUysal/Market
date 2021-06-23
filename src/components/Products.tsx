@@ -2,9 +2,11 @@ import styled from "styled-components";
 
 import ItemTypes from "./ItemTypes";
 import { useProducts } from "../api";
+import { useAppSelector } from "../app/hooks";
 
 function Products() {
-  const { products } = useProducts();
+  const itemType = useAppSelector((state) => state.itemType);
+  const { products } = useProducts({ itemType });
 
   console.log(products);
 
