@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import { useAppDispatch } from "../app/hooks";
 import { changeSortBy } from "../app/reducers/sortBy";
+import FilterHeader from "./FilterHeader";
+import FilterContainer from "./FilterContainer";
 
 function SortOptions() {
   const dispath = useAppDispatch();
@@ -22,58 +24,61 @@ function SortOptions() {
   };
 
   return (
-    <>
-      <Header>Sorting</Header>
-      <Container onChange={handleOptionChange}>
-        <label>
+    <div>
+      <FilterHeader title="Sorting" />
+      <FilterContainer>
+        <RadioLabel>
           <input
             type="radio"
             name="sortingOption"
             value="priceAsc"
             defaultChecked
+            onChange={handleOptionChange}
           />
           <span>Price low to high</span>
-        </label>
+        </RadioLabel>
 
-        <label>
-          <input type="radio" name="sortingOption" value="priceDesc" />
+        <RadioLabel>
+          <input
+            type="radio"
+            name="sortingOption"
+            value="priceDesc"
+            onChange={handleOptionChange}
+          />
           <span>Price high to low</span>
-        </label>
+        </RadioLabel>
 
-        <label>
-          <input type="radio" name="sortingOption" value="addedAsc" />
+        <RadioLabel>
+          <input
+            type="radio"
+            name="sortingOption"
+            value="addedAsc"
+            onChange={handleOptionChange}
+          />
           <span>New to old</span>
-        </label>
+        </RadioLabel>
 
-        <label>
-          <input type="radio" name="sortingOption" value="addedDesc" />
+        <RadioLabel>
+          <input
+            type="radio"
+            name="sortingOption"
+            value="addedDesc"
+            onChange={handleOptionChange}
+          />
           <span>Old to new</span>
-        </label>
-      </Container>
-    </>
+        </RadioLabel>
+      </FilterContainer>
+    </div>
   );
 }
 
-const Header = styled.h3`
-  color: #697488;
-  font-weight: 600;
-  font-size: 0.85rem;
-`;
+const RadioLabel = styled.label`
+  display: block;
+  color: #525252;
+  margin-bottom: 1rem;
 
-const Container = styled.div`
-  background-color: #ffffff;
-  box-shadow: 0px 6px 24px rgba(93, 62, 188, 0.04);
-  border-radius: 2px;
-  padding: 1rem;
-
-  & > label {
-    display: block;
-    color: #525252;
-    margin-bottom: 1rem;
-
-    & > span {
-      margin-left: 1rem;
-    }
+  & > span {
+    margin-left: 1rem;
   }
 `;
 
