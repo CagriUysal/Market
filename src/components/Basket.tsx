@@ -23,7 +23,7 @@ function Basket() {
 export default Basket;
 
 const BasketContainer = styled.div`
-  flex: 1 0 25%;
+  flex: 1 1 25%;
   align-self: flex-start;
 
   border-radius: 2px;

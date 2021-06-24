@@ -18,7 +18,8 @@ function Products() {
 export default Products;
 
 const ProductsContainer = styled.div`
-  flex: 2 0 50%;
+  flex: 1 1 50%;
+  margin: 0 2rem;
 `;
 
 const ProductTitle = styled.h2`

@@ -5,8 +5,11 @@ import { useAppSelector } from "../app/hooks";
 import ProductItem from "./ProductItem";
 
 function ProductList() {
-  const itemType = useAppSelector((state) => state.itemType);
-  const { products, loading } = useProducts({ itemType });
+  const { itemType, sortBy } = useAppSelector(({ itemType, sortBy }) => ({
+    itemType,
+    sortBy,
+  }));
+  const { products, loading } = useProducts({ itemType, sortBy });
 
   if (loading) return <p>loading..</p>;
 

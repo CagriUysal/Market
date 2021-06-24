@@ -13,7 +13,7 @@ function BasketItemList({ items }: Props) {
   return (
     <Container>
       {Object.values(items).map((item) => (
-        <BasketItem item={item} />
+        <BasketItem item={item} key={item.product.slug} />
       ))}
     </Container>
   );
