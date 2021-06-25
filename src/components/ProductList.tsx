@@ -2,20 +2,40 @@ import styled from "styled-components";
 
 import { useProducts } from "../api";
 import { useAppSelector } from "../app/hooks";
+import productFilter from "../utils/productFilter";
+import config from "../config";
 import ProductItem from "./ProductItem";
+import sortFactory from "../utils/sortFactory";
 
-function ProductList() {
-  const { itemType, sortBy } = useAppSelector(({ itemType, sortBy }) => ({
+interface Props {
+  page: number;
+}
+
+function ProductList({ page }: Props) {
+  const products = useProducts();
+  const { itemType, sortBy, brandsFilter } = useAppSelector(
+    ({ itemType, sortBy, brandsFilter }) => ({
+      itemType,
+      sortBy,
+      brandsFilter,
+    })
+  );
+
+  const filterOptions = {
     itemType,
-    sortBy,
-  }));
-  const { products, loading } = useProducts({ itemType, sortBy });
+    brandsFilter,
+  };
 
-  if (loading) return <p>loading..</p>;
+  const productsToBeDisplayed = products
+    .filter((product) => productFilter(product, filterOptions))
+    .sort(sortFactory(sortBy))
+    .slice((page - 1) * config.itemsPerPage, page * config.itemsPerPage); // pagination
+
+  console.log(productsToBeDisplayed);
 
   return (
     <Container>
-      {products?.map((product) => (
+      {productsToBeDisplayed.map((product) => (
         <ProductItem product={product} key={product.slug} />
       ))}
     </Container>

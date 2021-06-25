@@ -1,6 +1,10 @@
+import { ChangeEvent } from "react";
 import styled from "styled-components";
 
-import { useBrands } from "../api/brands";
+import { useAppDispatch } from "../app/hooks";
+
+import { Brand, useBrands } from "../api";
+import { addBrand, removeBrand } from "../app/reducers/brandsFilter";
 import searchFilter from "../utils/searchFilter";
 
 interface Props {
@@ -9,14 +13,28 @@ interface Props {
 
 function BrandList({ searchTerm }: Props) {
   const brands = useBrands();
+  const dispatch = useAppDispatch();
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>, brand: Brand) => {
+    if (event.target.checked === true) {
+      dispatch(addBrand(brand));
+    } else {
+      dispatch(removeBrand(brand));
+    }
+  };
+
   return (
     <Container>
       {brands
         .filter(({ name }) => searchFilter(name, searchTerm))
-        .map(({ name }) => (
-          <CheckboxLabel>
-            <input type="checkbox" />
-            <span>{name}</span>
+        .map((brand) => (
+          <CheckboxLabel key={brand.slug}>
+            <input
+              type="checkbox"
+              onChange={(e) => handleChange(e, brand)}
+              defaultChecked={brand.slug === "__ALL__"}
+            />
+            <span>{brand.name}</span>
           </CheckboxLabel>
         ))}
     </Container>

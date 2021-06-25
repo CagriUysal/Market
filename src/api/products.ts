@@ -1,7 +1,5 @@
-import useSWR from "swr";
-import { sortOptions } from "../app/reducers/sortBy";
+import { useState, useEffect } from "react";
 
-import config from "../config";
 import fetcher from "./fetcher";
 
 export type ItemType = "mug" | "shirt";
@@ -17,29 +15,15 @@ export interface Product {
   itemType: ItemType;
 }
 
-interface FetchOptions {
-  page?: number;
-  itemsPerPage?: number;
-  itemType: ItemType;
-  sortBy: sortOptions;
-}
+export function useProducts() {
+  const [products, setProducts] = useState<Product[]>([]);
 
-export function useProducts(fetchOptions: FetchOptions) {
-  const {
-    page = 1,
-    itemsPerPage = config.itemsPerPage,
-    itemType,
-    sortBy: { sortingField, order },
-  } = fetchOptions;
+  useEffect(() => {
+    (async function getBrands() {
+      const products = await fetcher<Product[]>("/items");
+      setProducts(products);
+    })();
+  }, []);
 
-  const key = `/items?_page=${page}
-		&_limit=${itemsPerPage}
-		&itemType=${itemType}
-		&_sort=${sortingField}
-		&_order=${order}
-	`;
-
-  const { data, error } = useSWR(key, (url) => fetcher<Product[]>(url));
-
-  return { products: data, error, loading: !data && !error };
+  return products;
 }

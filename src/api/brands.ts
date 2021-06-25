@@ -12,13 +12,27 @@ export interface Brand {
   contact: string;
 }
 
+// fake Brand for all brands
+const __ALL__ = {
+  slug: "__ALL__",
+  name: "All",
+  address: "",
+  city: "",
+  state: "",
+  zip: "",
+  account: 0,
+  contact: "",
+};
+
 export function useBrands() {
   const [brands, setBrands] = useState<Brand[]>([]);
 
   useEffect(() => {
     (async function getBrands() {
       const brands = await fetcher<Brand[]>("/companies");
-      setBrands(brands);
+      const brandsWithAll = [__ALL__, ...brands];
+
+      setBrands(brandsWithAll);
     })();
   }, []);
 

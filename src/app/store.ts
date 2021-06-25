@@ -3,12 +3,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import itemType from "./reducers/itemType";
 import basket from "./reducers/basket";
 import sortBy from "./reducers/sortBy";
+import brandsFilter from "./reducers/brandsFilter";
 
 const store = configureStore({
   reducer: {
     itemType,
     basket,
     sortBy,
+    brandsFilter,
   },
 });
 

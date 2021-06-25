@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface sortOptions {
+export interface SortOptions {
   sortingField: "price" | "added";
   order: "asc" | "desc";
 }
 
-const initialState = { sortingField: "price", order: "asc" } as sortOptions;
+const initialState = { sortingField: "price", order: "asc" } as SortOptions;
 
 export const sortBySlice = createSlice({
   name: "sortBy",
   initialState,
   reducers: {
-    changeSortBy: (state, action: PayloadAction<sortOptions>) => action.payload,
+    changeSortBy: (state, action: PayloadAction<SortOptions>) => action.payload,
   },
 });
 
