@@ -13,25 +13,25 @@ interface Props {
 
 function ProductList({ page }: Props) {
   const products = useProducts();
-  const { itemType, sortBy, brandsFilter } = useAppSelector(
-    ({ itemType, sortBy, brandsFilter }) => ({
+  const { itemType, sortBy, brandsFilter, tagsFilter } = useAppSelector(
+    ({ itemType, sortBy, brandsFilter, tagsFilter }) => ({
       itemType,
       sortBy,
       brandsFilter,
+      tagsFilter,
     })
   );
 
   const filterOptions = {
     itemType,
     brandsFilter,
+    tagsFilter,
   };
 
   const productsToBeDisplayed = products
     .filter((product) => productFilter(product, filterOptions))
     .sort(sortFactory(sortBy))
     .slice((page - 1) * config.itemsPerPage, page * config.itemsPerPage); // pagination
-
-  console.log(productsToBeDisplayed);
 
   return (
     <Container>

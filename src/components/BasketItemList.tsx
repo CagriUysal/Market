@@ -8,8 +8,6 @@ interface Props {
 }
 
 function BasketItemList({ items }: Props) {
-  console.log(items);
-
   return (
     <Container>
       {Object.values(items).map((item) => (

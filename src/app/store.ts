@@ -4,6 +4,7 @@ import itemType from "./reducers/itemType";
 import basket from "./reducers/basket";
 import sortBy from "./reducers/sortBy";
 import brandsFilter from "./reducers/brandsFilter";
+import tagsFilter from "./reducers/tagsFilter";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     basket,
     sortBy,
     brandsFilter,
+    tagsFilter,
   },
 });
 

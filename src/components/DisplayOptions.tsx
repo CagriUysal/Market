@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import Brands from "./Brands";
 
+import Brands from "./Brands";
+import Tags from "./Tags";
 import SortOptions from "./SortOptions";
 
 function DisplayOptions() {
@@ -8,6 +9,7 @@ function DisplayOptions() {
     <DisplayOptionsContainer>
       <SortOptions />
       <Brands />
+      <Tags />
     </DisplayOptionsContainer>
   );
 }
