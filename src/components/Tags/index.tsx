@@ -1,8 +1,8 @@
 import { useState, ChangeEvent } from "react";
 import styled from "styled-components";
 
-import FilterHeader from "./FilterHeader";
-import FilterContainer from "./FilterContainer";
+import FilterHeader from "../ui/FilterHeader";
+import FilterContainer from "../ui/FilterContainer";
 import TagList from "./TagList";
 
 function Tags() {

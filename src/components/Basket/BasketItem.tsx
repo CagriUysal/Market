@@ -4,8 +4,8 @@ import {
   BasketItem as BasketItemType,
   addItem,
   removeItem,
-} from "../app/reducers/basket";
-import { useAppDispatch } from "../app/hooks";
+} from "../../app/reducers/basket";
+import { useAppDispatch } from "../../app/hooks";
 
 interface Props {
   item: BasketItemType;

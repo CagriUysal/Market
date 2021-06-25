@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 
-import FilterHeader from "./FilterHeader";
-import FilterContainer from "./FilterContainer";
+import FilterHeader from "../ui/FilterHeader";
+import FilterContainer from "../ui/FilterContainer";
 import BrandList from "./BrandList";
 
 function Brands() {

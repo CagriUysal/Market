@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { BasketItems } from "../app/reducers/basket";
+import { BasketItems } from "../../app/reducers/basket";
 import BasketItem from "./BasketItem";
 
 interface Props {

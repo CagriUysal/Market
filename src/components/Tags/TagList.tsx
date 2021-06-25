@@ -1,10 +1,10 @@
 import { useMemo, ChangeEvent } from "react";
 import styled from "styled-components";
 
-import { Product, useProducts } from "../api";
-import { useAppDispatch } from "../app/hooks";
-import { addTag, removeTag } from "../app/reducers/tagsFilter";
-import searchFilter from "../utils/searchFilter";
+import { Product, useProducts } from "../../api";
+import { useAppDispatch } from "../../app/hooks";
+import { addTag, removeTag } from "../../app/reducers/tagsFilter";
+import searchFilter from "../../utils/searchFilter";
 
 interface Props {
   searchTerm: string;

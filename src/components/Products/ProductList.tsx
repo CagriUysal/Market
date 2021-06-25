@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-import { useProducts } from "../api";
-import { useAppSelector } from "../app/hooks";
-import productFilter from "../utils/productFilter";
-import config from "../config";
+import { useProducts } from "../../api";
+import { useAppSelector } from "../../app/hooks";
+import productFilter from "../../utils/productFilter";
+import config from "../../config";
 import ProductItem from "./ProductItem";
-import sortFactory from "../utils/sortFactory";
+import sortFactory from "../../utils/sortFactory";
 
 interface Props {
   page: number;

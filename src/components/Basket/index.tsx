@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import BasketItemList from "./BasketItemList";
-import { useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 
 function Basket() {
   const { items, total } = useAppSelector((state) => state.basket);

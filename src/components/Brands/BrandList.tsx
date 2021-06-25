@@ -1,11 +1,11 @@
 import { ChangeEvent } from "react";
 import styled from "styled-components";
 
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch } from "../../app/hooks";
 
-import { Brand, useBrands } from "../api";
-import { addBrand, removeBrand } from "../app/reducers/brandsFilter";
-import searchFilter from "../utils/searchFilter";
+import { Brand, useBrands } from "../../api";
+import { addBrand, removeBrand } from "../../app/reducers/brandsFilter";
+import searchFilter from "../../utils/searchFilter";
 
 interface Props {
   searchTerm: string;

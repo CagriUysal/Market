@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { Product } from "../api";
-import { useAppDispatch } from "../app/hooks";
-import { addItem } from "../app/reducers/basket";
+import { Product } from "../../api";
+import { useAppDispatch } from "../../app/hooks";
+import { addItem } from "../../app/reducers/basket";
 
 interface Props {
   product: Product;

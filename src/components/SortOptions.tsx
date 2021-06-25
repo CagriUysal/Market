@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { useAppDispatch } from "../app/hooks";
 import { changeSortBy } from "../app/reducers/sortBy";
-import FilterHeader from "./FilterHeader";
-import FilterContainer from "./FilterContainer";
+import FilterHeader from "./ui/FilterHeader";
+import FilterContainer from "./ui/FilterContainer";
 
 function SortOptions() {
   const dispath = useAppDispatch();
