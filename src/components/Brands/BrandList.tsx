@@ -1,9 +1,9 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useMemo } from "react";
 import styled from "styled-components";
 
 import { useAppDispatch } from "../../app/hooks";
 
-import { Brand, useBrands } from "../../api";
+import { Brand, Product, useBrands, useProducts } from "../../api";
 import { addBrand, removeBrand } from "../../app/reducers/brandsFilter";
 import searchFilter from "../../utils/searchFilter";
 
@@ -11,9 +11,28 @@ interface Props {
   searchTerm: string;
 }
 
+const getItemCountPerBrand = (brands: Brand[], products: Product[]) => {
+  const itemsPerBrand: { [brandSlug: string]: number } = {};
+  brands.forEach(({ slug }) => {
+    itemsPerBrand[slug] = 0;
+  });
+
+  products.forEach(({ manufacturer }) => {
+    itemsPerBrand[manufacturer]++;
+  });
+
+  return itemsPerBrand;
+};
+
 function BrandList({ searchTerm }: Props) {
   const brands = useBrands();
+  const products = useProducts();
   const dispatch = useAppDispatch();
+
+  const itemsPerBrand = useMemo(
+    () => getItemCountPerBrand(brands, products),
+    [brands, products]
+  );
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>, brand: Brand) => {
     if (event.target.checked === true) {
@@ -34,12 +53,23 @@ function BrandList({ searchTerm }: Props) {
               onChange={(e) => handleChange(e, brand)}
               defaultChecked={brand.slug === "__ALL__"}
             />
-            <span>{brand.name}</span>
+            <span>
+              {brand.name}{" "}
+              <Count>
+                (
+                {brand.slug === "__ALL__"
+                  ? products.length
+                  : itemsPerBrand[brand.slug]}
+                )
+              </Count>
+            </span>
           </CheckboxLabel>
         ))}
     </Container>
   );
 }
+
+export default BrandList;
 
 const Container = styled.div`
   height: 8rem;
@@ -61,4 +91,6 @@ const CheckboxLabel = styled.label`
   }
 `;
 
-export default BrandList;
+const Count = styled.span`
+  color: #a8a8a8;
+`;
