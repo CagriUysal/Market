@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 import ItemTypes from "../ItemTypes";
@@ -6,13 +5,11 @@ import ProductList from "./ProductList";
 import Pagination from "../Pagination";
 
 function Products() {
-  const [page, setPage] = useState(1);
-
   return (
     <ProductsContainer>
       <ProductTitle>Products</ProductTitle>
       <ItemTypes />
-      <ProductList page={page} />
+      <ProductList />
       <Pagination />
     </ProductsContainer>
   );

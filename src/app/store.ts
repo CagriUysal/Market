@@ -5,6 +5,7 @@ import basket from "./reducers/basket";
 import sortBy from "./reducers/sortBy";
 import brandsFilter from "./reducers/brandsFilter";
 import tagsFilter from "./reducers/tagsFilter";
+import page from "./reducers/page";
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     sortBy,
     brandsFilter,
     tagsFilter,
+    page,
   },
 });
 
