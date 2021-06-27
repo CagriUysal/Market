@@ -32,7 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.{ts,tsx}",
-    "start:server": "json-server server/db.json --port 4000"
+    "start:server": "node server/api/index.js"
   },
   "eslintConfig": {
     "extends": [
