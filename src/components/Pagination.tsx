@@ -30,9 +30,21 @@ function Pagination() {
                 {page}
               </Page>
             );
-          } else if (type === "Prev" || type === "Next") {
+          } else if (type === "Prev") {
             children = (
-              <GhostButton onClick={() => handleClick(page)}>
+              <GhostButton
+                onClick={() => handleClick(page)}
+                disabled={currentPage <= 1}
+              >
+                {type}
+              </GhostButton>
+            );
+          } else if (type === "Next") {
+            children = (
+              <GhostButton
+                onClick={() => handleClick(page)}
+                disabled={currentPage >= totalPages}
+              >
                 {type}
               </GhostButton>
             );
@@ -69,7 +81,7 @@ const GhostButton = styled.button`
   background-color: transparent;
   border: 1px solid transparent;
   color: ${(props) => props.theme.colors.primary};
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   padding: 0.5rem;
   border-radius: 2px;
   font-weight: 600;
