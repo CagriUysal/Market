@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import useSWR from "swr";
 
 import fetcher from "./fetcher";
 
@@ -16,14 +16,12 @@ export interface Product {
 }
 
 export function useProducts() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const key = "/items";
+  const { data, error } = useSWR(key, () => fetcher<Product[]>(key));
 
-  useEffect(() => {
-    (async function getBrands() {
-      const products = await fetcher<Product[]>("/items");
-      setProducts(products);
-    })();
-  }, []);
-
-  return products;
+  return {
+    products: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
 }

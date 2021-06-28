@@ -9,7 +9,7 @@ import sortFactory from "../../utils/sortFactory";
 
 function useDisplayProducts() {
   // fetch whole products for once
-  const products = useProducts();
+  const { products } = useProducts();
 
   // display options controled by multiple components
   const {
@@ -34,9 +34,11 @@ function useDisplayProducts() {
       tagsFilter,
     };
 
-    setFilteredProducts(
-      products.filter((product) => productFilter(product, filterOptions))
-    );
+    if (products) {
+      setFilteredProducts(
+        products.filter((product) => productFilter(product, filterOptions))
+      );
+    }
   }, [itemType, brandsFilter, tagsFilter, products]);
 
   useEffect(() => {

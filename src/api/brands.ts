@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import useSWR from "swr";
+
 import fetcher from "./fetcher";
 
 export interface Brand {
@@ -25,16 +26,13 @@ const __ALL__ = {
 };
 
 export function useBrands() {
-  const [brands, setBrands] = useState<Brand[]>([]);
+  const key = "/companies";
+  const { data, error } = useSWR(key, () => fetcher<Brand[]>(key));
 
-  useEffect(() => {
-    (async function getBrands() {
-      const brands = await fetcher<Brand[]>("/companies");
-      const brandsWithAll = [__ALL__, ...brands];
-
-      setBrands(brandsWithAll);
-    })();
-  }, []);
-
-  return brands;
+  return {
+    // add the fake __ALL__ brand to the data for filtering purposes
+    brands: data ? [__ALL__, ...data] : undefined,
+    isLoading: !error && !data,
+    isError: error,
+  };
 }

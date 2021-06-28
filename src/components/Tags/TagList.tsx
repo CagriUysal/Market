@@ -35,8 +35,12 @@ const constructTags = (products: Product[]) => {
 };
 
 function TagList({ searchTerm }: Props) {
-  const products = useProducts();
-  const tags = useMemo(() => constructTags(products), [products]);
+  const { products } = useProducts();
+  const tags = useMemo(() => {
+    if (products) {
+      return constructTags(products);
+    }
+  }, [products]);
   const dispatch = useAppDispatch();
 
   const handleChange = (
@@ -50,25 +54,29 @@ function TagList({ searchTerm }: Props) {
     }
   };
 
-  return (
-    <Container>
-      {tags
-        .filter(([tagName]) => searchFilter(tagName, searchTerm))
-        .map(([tagName, count]) => (
-          <CheckboxLabel key={tagName}>
-            <input
-              type="checkbox"
-              onChange={(e) => handleChange(e, tagName)}
-              defaultChecked={tagName === "__ALL__"}
-            />
-            <span>
-              {tagName === "__ALL__" ? "All" : tagName}{" "}
-              <Count>{`(${count})`}</Count>
-            </span>
-          </CheckboxLabel>
-        ))}
-    </Container>
-  );
+  if (tags) {
+    return (
+      <Container>
+        {tags
+          .filter(([tagName]) => searchFilter(tagName, searchTerm))
+          .map(([tagName, count]) => (
+            <CheckboxLabel key={tagName}>
+              <input
+                type="checkbox"
+                onChange={(e) => handleChange(e, tagName)}
+                defaultChecked={tagName === "__ALL__"}
+              />
+              <span>
+                {tagName === "__ALL__" ? "All" : tagName}{" "}
+                <Count>{`(${count})`}</Count>
+              </span>
+            </CheckboxLabel>
+          ))}
+      </Container>
+    );
+  } else {
+    return <p>...loading</p>; // TODO: better loading animation
+  }
 }
 
 export default TagList;

@@ -25,14 +25,15 @@ const getItemCountPerBrand = (brands: Brand[], products: Product[]) => {
 };
 
 function BrandList({ searchTerm }: Props) {
-  const brands = useBrands();
-  const products = useProducts();
+  const { brands } = useBrands();
+  const { products } = useProducts();
   const dispatch = useAppDispatch();
 
-  const itemsPerBrand = useMemo(
-    () => getItemCountPerBrand(brands, products),
-    [brands, products]
-  );
+  const itemsPerBrand = useMemo(() => {
+    if (products && brands) {
+      return getItemCountPerBrand(brands, products);
+    }
+  }, [brands, products]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>, brand: Brand) => {
     if (event.target.checked === true) {
@@ -42,31 +43,36 @@ function BrandList({ searchTerm }: Props) {
     }
   };
 
-  return (
-    <Container>
-      {brands
-        .filter(({ name }) => searchFilter(name, searchTerm))
-        .map((brand) => (
-          <CheckboxLabel key={brand.slug}>
-            <input
-              type="checkbox"
-              onChange={(e) => handleChange(e, brand)}
-              defaultChecked={brand.slug === "__ALL__"}
-            />
-            <span>
-              {brand.name}{" "}
-              <Count>
-                (
-                {brand.slug === "__ALL__"
-                  ? products.length
-                  : itemsPerBrand[brand.slug]}
-                )
-              </Count>
-            </span>
-          </CheckboxLabel>
-        ))}
-    </Container>
-  );
+  if (brands && products && itemsPerBrand) {
+    // all necessary data is loaded from api, (itemsPerBrands is calculated)
+    return (
+      <Container>
+        {brands
+          .filter(({ name }) => searchFilter(name, searchTerm))
+          .map((brand) => (
+            <CheckboxLabel key={brand.slug}>
+              <input
+                type="checkbox"
+                onChange={(e) => handleChange(e, brand)}
+                defaultChecked={brand.slug === "__ALL__"}
+              />
+              <span>
+                {brand.name}{" "}
+                <Count>
+                  (
+                  {brand.slug === "__ALL__"
+                    ? products.length
+                    : itemsPerBrand[brand.slug]}
+                  )
+                </Count>
+              </span>
+            </CheckboxLabel>
+          ))}
+      </Container>
+    );
+  } else {
+    return <p>...loading</p>; // TODO: better loading animation
+  }
 }
 
 export default BrandList;
